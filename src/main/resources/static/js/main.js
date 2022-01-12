@@ -48,7 +48,7 @@ function getOtherPc(pc) {
   return (pc === pc1) ? pc2 : pc1;
 }
 
-async function start() {
+async  function start() {
   console.log('Requesting local stream');
   startButton.disabled = true;
   try {
@@ -59,7 +59,7 @@ async function start() {
     callButton.disabled = false;
   } catch (e) {
     alert(`getUserMedia() error: ${e.name}`);
-  }
+  } 
 }
 
 async function call() {
