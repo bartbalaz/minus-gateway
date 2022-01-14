@@ -3,8 +3,14 @@
 Some experimentation with WebRTC samples :-)
 
 
-# Getting tls certificate using certbot on a linux host
+## Getting TLS certificate from **letsencrypt** using **certbot** docker image on a linux host
 
+### Prerequisites
+1. Setup a Linux host (any recent Linux distribution)
+1. Make sure to forward port 80 (http) to the Linux host (Gaming configuraiton on your home router)
+1. Install [docker](https://docs.docker.com/engine/install/)
+
+### Procedure
 ```bash
 # Set host name (e.g. host.example.com)
 export HOST_NAME=
@@ -31,3 +37,6 @@ cp ./cert/archive/$HOST_NAME/fullchain1.pem ./tls.crt
 cp ./cert/archive/$HOST_NAME/privkey1.pem ./tls.key
 rm -rf ./cert ./lock
 ```
+
+
+# Setup nginx to 
