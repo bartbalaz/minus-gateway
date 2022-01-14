@@ -5,7 +5,7 @@ Some experimentation with WebRTC samples :-)
 
 # Getting tls certificate using certbot on a linux host
 
-'''bash
+```bash
 # Set host name (e.g. host.example.com)
 export HOST_NAME=
 
@@ -30,4 +30,4 @@ sudo chgrp -R bartosz ./cert
 cp ./cert/archive/$HOST_NAME/fullchain1.pem ./tls.crt
 cp ./cert/archive/$HOST_NAME/privkey1.pem ./tls.key
 rm -rf ./cert ./lock
-'''
+```
