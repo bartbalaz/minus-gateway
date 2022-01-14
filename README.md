@@ -9,13 +9,14 @@ subnet (vs NAT). It is preferable to assign a static IP address to allow port fo
 1. Install [docker](https://docs.docker.com/engine/install/)
 1. Get a free host name for your public IP address e.g. from [No-IP](https://www.noip.com/)
 
-## Get TLS certificate and key from _letsencrypt_ using _certbot_ docker image on a linux host
+## Get TLS certificate and key from _letsencrypt_ using _certbot_ docker image on the Linux host
 
 ```bash
 # Set host name (e.g. host.example.com)
 export HOST_NAME=
 
-# Requested e-mail address (e.g. some_dude@example.com)
+# Requester e-mail address (e.g. some_dude@example.com), Letsencrypt will send you an email when your 
+# certificate is about to expire
 export EMAIL_ADDRESS=
 
 # Stop nginx or any http server that may be running, for nginx:
