@@ -4,12 +4,12 @@ Some experimentation with WebRTC samples, web sockets, springboot etc.
 ## Setup an experimental Linux host
 1. Setup a Linux host (any distribution will do), if you are using a virtual machine make sure that 
 the networking is set to _bridge_ and that your virtual machine gets assigned a IP address from your home 
-subnet (vs NAT). It is preferable to assign a static IP address to allow host forwarding.
-1. Make sure to forward port 80 (_http_) and 443 (_https_) to the Linux host (Gaming configuraiton on your home router)
+subnet (vs NAT). It is preferable to assign a static IP address to allow port forwarding.
+1. Make sure to forward port 80 (_http_) and 443 (_https_) to the Linux host (e.g. _Gaming_ configuraiton on your home router)
 1. Install [docker](https://docs.docker.com/engine/install/)
 1. Get a free host name for your public IP address e.g. from [No-IP](https://www.noip.com/)
 
-## Getting TLS certificate and key from **letsencrypt** using **certbot** docker image on a linux host
+## Get TLS certificate and key from _letsencrypt_ using _certbot_ docker image on a linux host
 
 ```bash
 # Set host name (e.g. host.example.com)
