@@ -59,6 +59,16 @@ you should be able to get to your host using _http_ with any browser.
 		server_name         <host name>;
 		ssl_certificate     <path to tls certficate>.crt;
 		ssl_certificate_key <path to tls key>.key;
+		
+		# Add the lines below to serve the default /var/www/html directory
+		root /var/www/html;
+		index index.html index.htm index.nginx-debian.html;
+	
+		location / {
+			# First attempt to serve request as file, then
+			# as directory, then fall back to displaying a 404.
+			try_files $uri $uri/ =404;
+		}
 	}
 	```
 1. Enable the site
