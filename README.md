@@ -1,5 +1,13 @@
 # Minus Gateway
-Some experimentation with WebRTC samples, web sockets, springboot etc. 
+This project is ment to be an experimentation work in progress. There are no funcional requirements or objectives, 
+the only purpose is explore WebRTC, spring boot and websockets. This file provides the setup/experimentation notes.
+
+## Network topology
+
+[WebRTC client] -------\ 
+[WebRTC client] ---- { WWW } --- [Linux host, running NGINX for TLS termination] --- [Host running the spring boot WebRTC application]
+[WebRTC client] -------/
+
 
 ## Setup an experimental Linux host
 1. Setup a Linux host (any distribution will do), if you are using a virtual machine make sure that 
@@ -44,7 +52,8 @@ cp ./cert/archive/$HOST_NAME/privkey1.pem ./$HOST_NAME.key
 rm -rf ./cert ./lock
 ```
 
-## Setup _nginx_ to provide an HTTPS endpoint
+## Setup _nginx_ to provide an HTTPS endpoint allowing websocket forwarding
+When working with _spring/spring boot_, or with 
 1. Install [NGINX](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/),
 you should be able to get to your host using _http_ with any browser.
 1. Get to the _nginx_ site configuration folder
