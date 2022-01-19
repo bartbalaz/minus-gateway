@@ -3,11 +3,8 @@ This project is ment to be an experimentation work in progress. There are no fun
 the only purpose is explore WebRTC, spring boot and websockets. This file provides the setup/experimentation notes.
 
 ## Network topology
-
-[WebRTC client] -------\ 
-[WebRTC client] ---- { WWW } --- [Linux host, running NGINX for TLS termination] --- [Host running the spring boot WebRTC application]
-[WebRTC client] -------/
-
+The figure below sumarizes the network topology of the experimentation setup.
+![Network Layout](./doc/network_layout.jpg)
 
 ## Setup an experimental Linux host
 1. Setup a Linux host (any distribution will do), if you are using a virtual machine make sure that 
