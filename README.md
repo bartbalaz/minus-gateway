@@ -4,7 +4,15 @@ the only purpose is explore WebRTC, spring boot and websockets. This file provid
 
 ## Network topology
 The figure below sumarizes the network topology of the experimentation setup.
+
 ![Network Layout](./doc/network_layout.jpg)
+
+1. WebRTC client: Any host with a browser attached to the Internet, directly or through a fire wall
+1. DNS server: A public DNS service allowing to create A type records pointing to the Home router public Ip address
+1. Host running NGINX: Any Linux host running the NGINX HTTP server allowing to end the TLS session and proxy HTTP 
+and WebSocket sessions to the Host running Spring Boot. 
+1. Host running Spring Boot: This host may be colocated with the host running NGINX. It simply executes the 
+spring boot packaged implementation.
 
 ## Setup an experimental Linux host
 1. Setup a Linux host (any distribution will do), if you are using a virtual machine make sure that 
@@ -60,22 +68,34 @@ you should be able to get to your host using _http_ with any browser.
 	```
 1. Create a site configuration file (e.g. ``` vi $HOST_NAME ```) with the following content
 	```bash
-	server {
-		listen              443 ssl;
-		server_name         <host name>;
-		ssl_certificate     <path to tls certficate>.crt;
-		ssl_certificate_key <path to tls key>.key;
-		
-		# Add the lines below to serve the default /var/www/html directory
-		root /var/www/html;
-		index index.html index.htm index.nginx-debian.html;
-	
-		location / {
-			# First attempt to serve request as file, then
-			# as directory, then fall back to displaying a 404.
-			try_files $uri $uri/ =404;
-		}
-	}
+     map $http_upgrade $connection_upgrade {
+         default upgrade;
+         ''      close;
+     }
+     
+     server {
+         listen              443 ssl;
+         server_name         <host name>;
+         ssl_certificate     <path to the certificate (*.crt) file>;
+         ssl_certificate_key <path to the key (*.key) file>;
+     
+     
+         # Proxying the HTTP request (e.g. static content)
+         location / {
+             proxy_pass <URL of the host running Spring Boot (e.g. http://x.y.z.w:1000)>;
+         }
+     
+         # Proxying the web sockets
+         location /gs-guide-websocket {
+            proxy_pass <URL of the host running Spring Boot (e.g. http://x.y.z.w:1000)>;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "Upgrade";
+            proxy_set_header Host $host;
+            proxy_set_header Origin "";
+         }
+     }
+
 	```
 1. Enable the site
 	```bash
