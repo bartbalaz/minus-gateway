@@ -11,8 +11,12 @@ function setConnected(connected) {
     }
     $("#greetings").html("");
 }
+var ws;
 
 function connect() {
+
+    /*
+
     var socket = new SockJS('https://bbalaz.ddns.net/gs-guide-websocket');
     //var socket = new SockJS('http://192.168.1.10:8080/gs-guide-websocket');
 
@@ -24,18 +28,39 @@ function connect() {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
+
+    */
+
+    	ws = new WebSocket('wss://bbalaz.ddns.net/ws');
+    	ws.onmessage = function(data){
+    		showGreeting(data.data);
+    	}
+
+    	console.log("connecting...")
 }
 
+
+
+
 function disconnect() {
+/*
     if (stompClient !== null) {
         stompClient.disconnect();
     }
     setConnected(false);
     console.log("Disconnected");
+    */
+
+        if (ws != null) {
+            ws.close();
+        }
+        console.log("Disconnected");
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+   // stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    ws.send(JSON.stringify($("#name").val()));
+
 }
 
 function showGreeting(message) {
