@@ -38,19 +38,15 @@ public class GreetingController {
 
         log.info("Array " + Arrays.toString(array));
 
-        Stream<Integer> stream = Stream.of(array);
+        List<Integer> list =  Stream.of(array).map( e -> e*10).collect(Collectors.toList());
 
-        List<Integer> list = stream.collect(Collectors.toList());
+        StringBuilder sb = new StringBuilder();
 
-        log.info("Stream before: " + list);
+        for(int i: list) {
+            sb.append(i + ", ");
+        }
 
-        stream = list.stream();
-
-        stream.forEach( e -> e = e*10 );
-
-        list = stream.collect(Collectors.toList());
-
-        log.info("Stream after " + list );
+        log.info("After transformation " + sb.toString());
     }
 
 }
