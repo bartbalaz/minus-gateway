@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.util.HtmlUtils;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Controller
@@ -38,18 +40,17 @@ public class GreetingController {
 
         Stream<Integer> stream = Stream.of(array);
 
-        StringBuilder sb = new StringBuilder();
+        List<Integer> list = stream.collect(Collectors.toList());
 
-        stream.forEach( e -> sb.append(e).append(", "));
+        log.info("Stream before: " + list);
 
-        log.info("Stream before: "+ sb.toString());
+        stream = list.stream();
 
-        stream.forEach( e-> e = e*10 );
+        stream.forEach( e -> e = e*10 );
 
-        sb = new StringBuilder();
-        stream.forEach( e -> sb.append(e).append(", "));
+        list = stream.collect(Collectors.toList());
 
-        log.info("Stream after " + stream.toString());
+        log.info("Stream after " + list );
     }
 
 }
